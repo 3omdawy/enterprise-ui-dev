@@ -12,8 +12,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        name: Checkout Repository
       - name: Setup Node
         uses: actions/setup-node@v3
+      - uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ~/.npm # where NPM modules are saved
+          key: npm-${{ hashFiles('**/package-lock.json') }} # key is the hash to be update whenever the file changes
       - run: npm ci
       - run: npm test
 
@@ -22,7 +28,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        name: Checkout Repository
       - name: Setup Node
         uses: actions/setup-node@v3
+      - uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ~/.npm # where NPM modules are saved
+          key: npm-${{ hashFiles('**/package-lock.json') }} # key is the hash to be update whenever the file changes
       - run: npm ci
       - run: npm run build

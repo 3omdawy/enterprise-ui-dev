@@ -11,8 +11,8 @@ steps:
   - uses: actions/cache@v3 # 👀
     id: npm-cache # 👀
     with: # 👀
-      path: ~/.npm # 👀
-      key: npm-${{ hashFiles('**/package-lock.json') }} # 👀
+      path: ~/.npm # where NPM modules are saved
+      key: npm-${{ hashFiles('**/package-lock.json') }} # key is the hash to be update whenever the file changes
   - run: npm ci
     name: Install modules from npm
   - run: npm test
