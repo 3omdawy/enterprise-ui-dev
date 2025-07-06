@@ -15,11 +15,9 @@ jobs:
         name: Checkout Repository
       - name: Setup Node
         uses: actions/setup-node@v3
-      - uses: actions/cache@v3
-        id: npm-cache
         with:
-          path: ~/.npm # where NPM modules are saved
-          key: npm-${{ hashFiles('**/package-lock.json') }} # key is the hash to be update whenever the file changes
+          node-version: 18
+          cache: 'npm'
       - run: npm ci
       - run: npm test
 
@@ -31,10 +29,8 @@ jobs:
         name: Checkout Repository
       - name: Setup Node
         uses: actions/setup-node@v3
-      - uses: actions/cache@v3
-        id: npm-cache
         with:
-          path: ~/.npm # where NPM modules are saved
-          key: npm-${{ hashFiles('**/package-lock.json') }} # key is the hash to be update whenever the file changes
+          node-version: 18
+          cache: 'npm'
       - run: npm ci
       - run: npm run build
