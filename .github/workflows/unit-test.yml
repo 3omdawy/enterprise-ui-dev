@@ -21,6 +21,25 @@ jobs:
       - run: npm ci
       - run: npm test
 
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout Repository
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test -- --coverage
+      - uses: actions/upload-artifact@v3
+        name: Archive Coverage Report
+        with:
+          name: coverage-report
+          path: coverage
+
   build:
     runs-on: ubuntu-latest
 
